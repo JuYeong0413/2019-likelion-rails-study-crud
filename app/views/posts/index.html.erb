@@ -1,0 +1,13 @@
+<div class="row">
+  <% if @posts.present? %>
+		<% @posts.each do |post| %>
+			<div class="card col-4" style="width: 18rem;">
+				<div class="card-body">
+					<h2 class="card-title"><%= post.title %></h2>
+					<p class="card-text">작성자 : <%= post.writer %></p>
+					<a href="/posts/<%= post.id %>" class="btn btn-primary">글 보러가기</a>
+				</div>
+			</div>
+		<% end %>
+	<% end %>
+</div>
