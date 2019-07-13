@@ -18,6 +18,7 @@ class PostsController < ApplicationController
     
     # 상세보기
     def show
+        @post.increase_view_count
     end
     
     # 수정
@@ -41,6 +42,6 @@ class PostsController < ApplicationController
     end
     
     def set_params
-        params.require(:post).permit(:title, :writer, :content)
+        params.require(:post).permit(:title, :writer, :content, :view_count)
     end
 end

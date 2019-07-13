@@ -16,8 +16,9 @@ ActiveRecord::Schema.define(version: 20190713162712) do
     t.string   "title"
     t.string   "writer"
     t.text     "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "view_count", default: 0
+    t.datetime "created_at",             null: false
+    t.datetime "updated_at",             null: false
   end
 
 end
