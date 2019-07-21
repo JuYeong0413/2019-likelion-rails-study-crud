@@ -7,6 +7,8 @@ class Post < ApplicationRecord
     def increase_view_count
         self.view_count = view_count + 1
         self.save
+
+    has_many :comments, dependent: :destroy
     end
     
 end
