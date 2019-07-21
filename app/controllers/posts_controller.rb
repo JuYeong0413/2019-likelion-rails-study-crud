@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+    before_action :authenticate_user!
     before_action :load_post, only: [:show, :edit, :update, :destroy]
     
     def index
@@ -11,13 +12,13 @@ class PostsController < ApplicationController
     end
     
     def create
-        @post = Post.new(set_params)
-        @post.save
+        Post.create!(set_params)
         redirect_to root_path
     end
     
     # 상세보기
     def show
+        @comments = Comment.where(post: @post)
         @post.increase_view_count
     end
     
@@ -26,7 +27,7 @@ class PostsController < ApplicationController
     end
     
     def update
-        @post.update(set_params)
+        @post.update!(set_params)
         redirect_to post_path(@post)
     end
     
