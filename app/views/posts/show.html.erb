@@ -17,6 +17,26 @@
 	</div>
 </div>
 
+<br>
+
+<div>
+  <div id="comments" style="margin-bottom: 20px;">
+    <% @comments.each do |comment| %>
+      <%= render comment %>
+      <% if current_user == comment.user %>
+        <span class="text-right"><%= link_to "삭제", post_comment_path(@post, comment), method: :delete %></span>
+      <% end %>
+      <br>
+    <% end %>
+  </div>
+
+  <% if user_signed_in? %>
+    <%= form_for(Comment.new, url: post_comments_path(@post), remote: true) do |f| %>
+      <%= f.text_area :message, class: "form-control col-md-4", placeholder: "댓글을 입력해 주세요.." %><br>
+      <%= f.submit "댓글 작성하기", class: "btn btn-primary" %>
+    <% end %>
+  <% end %>
+</div>
 
 
 <!-- Modal -->
@@ -40,16 +60,3 @@
   </div>
 </div>
 
-<% if user_signed_in? %>
-  <%= form_for(Comment.new, url: post_comments_path(@post), remote: true) do |f| %>
-    <%= f.label :message %><br>
-    <%= f.text_area :message, id: "message-body" %><br><br>
-    <%= f.submit "댓글 작성하기" %>
-  <% end %>
-<% end %>
-    
-<div id="comments">
-  <% @comments.each do |comment| %>
-    <%= render "comment" %><br>
-  <% end %>
-</div>

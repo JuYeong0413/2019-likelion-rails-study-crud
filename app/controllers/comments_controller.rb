@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
 		params.require(:comment).permit(:message)
 	end
 	
-	def load_item
+	def load_post
 		@post = Post.find params[:post_id]
 	end
 end
