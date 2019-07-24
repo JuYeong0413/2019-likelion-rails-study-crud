@@ -1,8 +1,13 @@
 <%= form_for(@post) do |f| %>
   <label>제목</label><br>
-  <%= f.text_field :title, class: "form-control col-md-4", placeholder: "제목", required: true %>
+  <%= f.text_field :title, class: "form-control col-md-4", placeholder: "제목", required: true, autofocus: true %>
   
   <br>
+
+  <label>이미지</label><br>
+  <%= f.file_field :image %>
+
+  <br><br>
   
   <label>글내용</label><br>
   <%= f.text_area :content, class: "form-control col-md-4", rows: "8", placeholder: "내용을 입력해 주세요..", required: true %>

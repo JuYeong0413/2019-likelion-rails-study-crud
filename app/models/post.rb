@@ -1,4 +1,5 @@
 class Post < ApplicationRecord
+	mount_uploader :image, ImageUploader
 
 	def self.delete_message
 		"삭제한 글은 복구할 수 없습니다."

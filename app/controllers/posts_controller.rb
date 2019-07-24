@@ -9,6 +9,7 @@ class PostsController < ApplicationController
 	# 글쓰기
 	def new
 		@post = Post.new
+
 	end
 	
 	def create
@@ -47,6 +48,6 @@ class PostsController < ApplicationController
 	end
 	
 	def set_params
-		params.require(:post).permit(:title, :content, :view_count)
+		params.require(:post).permit(:title, :content, :image, :view_count)
 	end
 end
