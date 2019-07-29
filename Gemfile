@@ -8,6 +8,7 @@ end
 
 gem 'activeadmin'
 gem 'devise'
+gem 'rails_db'
 gem 'carrierwave', '>= 2.0.0.rc', '< 3.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.7', '>= 5.0.7.2'
