@@ -9,7 +9,6 @@ class PostsController < ApplicationController
 	# 글쓰기
 	def new
 		@post = Post.new
-
 	end
 	
 	def create
@@ -23,7 +22,9 @@ class PostsController < ApplicationController
 	
 	# 상세보기
 	def show
-		@comments = Comment.where(post: @post)
+		# @comments = Comment.where(post: @post)
+		@comment = Comment.new
+		@comments = @post.comments
 		@post.increase_view_count
 	end
 	

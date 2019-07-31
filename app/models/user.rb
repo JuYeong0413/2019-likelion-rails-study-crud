@@ -5,5 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :comments, dependent: :destroy
-  has_many :users, dependent: :destroy
+  has_many :posts, dependent: :nullify
+
+  # enum role: [:admin, :normal]
 end

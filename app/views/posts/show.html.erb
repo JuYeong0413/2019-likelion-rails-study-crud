@@ -32,7 +32,7 @@
   </div>
 
   <% if user_signed_in? %>
-    <%= form_for(Comment.new, url: post_comments_path(@post), remote: true) do |f| %>
+    <%= form_for(@comment, url: post_comments_path(@post)) do |f| %>
       <%= f.text_area :message, class: "form-control col-md-4", placeholder: "댓글을 입력해 주세요.." %><br>
       <%= f.submit "댓글 작성하기", class: "btn btn-primary" %>
     <% end %>
