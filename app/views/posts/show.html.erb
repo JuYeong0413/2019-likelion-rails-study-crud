@@ -7,12 +7,20 @@
 			<p class="card-text">조회수 : <%= @post.view_count %></p>
       <p class="card-text"><%= image_tag("#{@post.image}", class: "card-img-top") %></p>
 			<p class="card-text">
+				<% if current_user.is_like? (@post) %>
+					<%= link_to "좋아요 취소", post_like_path(@post), method: "post", class: "btn btn-danger" %>
+				<% else %>
+					<%= link_to "좋아요", post_like_path(@post), method: "post", class: "btn btn-danger" %>
+				<% end %>
+
+				<br>
+
+				<%= @post.liked_users.count %>명이 좋아합니다.
 				<% @post.liked_users.each do |liked_user| %>
 					<%= liked_user.username %>&nbsp;
 				<% end %>
-				(<%= @post.liked_users.count %>명)이 좋아합니다.
 			</p>
-			<p class="card-text"><%= simple_format @post.content %></p>
+			<h5 class="card-text"><%= simple_format @post.content %></h5>
       <% if @post.user == current_user %>
         <a href="/posts/<%= @post.id %>/edit" class="btn btn-primary">수정하기</a>
         <!-- Button trigger modal -->
