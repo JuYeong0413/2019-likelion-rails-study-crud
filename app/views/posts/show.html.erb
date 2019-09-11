@@ -5,13 +5,27 @@
 			<h5 class="card-text">작성자 : <%= @post.user.username %></h5>
 			<span class="card-text"><%= @post.created_at.strftime("%Y/%m/%d %H:%M") %></span>
 			<p class="card-text">조회수 : <%= @post.view_count %></p>
-      <p class="card-text"><%= image_tag("#{@post.image}", class: "card-img-top") %></p>
+      		<p class="card-text"><%= image_tag("#{@post.image}", class: "card-img-top") %></p>
 			<p class="card-text">
-				<% if current_user.is_like? (@post) %>
-					<%= link_to "좋아요 취소", post_like_path(@post), method: "post", class: "btn btn-danger" %>
-				<% else %>
-					<%= link_to "좋아요", post_like_path(@post), method: "post", class: "btn btn-danger" %>
+				<% heart_state = @post.liked_users.include?(current_user) ? 'heart' : 'heart-empty' %>
+				<%#= link_to '#', id: 'like-button', remote: true do %>
+				<%#= link_to like_toggle_path(@post), method: :post, id: 'like-button' do %>
+				<%= link_to like_toggle_path(@post), method: :post, id: 'like-button', remote: true do %>
+					<%# if @post.liked_users.include?(current_user) %>
+						<i class="icon ion-ios-<%= heart_state %>" id="heart"></i>
+						<!-- <i class="icon ion-ios-heart"></i>
+					<%# else %>
+						<i class="icon ion-ios-heart-empty"></i> -->
+					<%# end %>
 				<% end %>
+				<!-- path는 /뒤에 거, url은 도메인 전체임, 보통 path 사용, 객체 던져주면 알아서 아이디 날라감-->
+
+
+				<%# if current_user.is_like? (@post) %>
+					<%#= link_to "좋아요 취소", post_like_path(@post), method: "post", class: "btn btn-danger" %>
+				<%# else %>
+					<%#= link_to "좋아요", post_like_path(@post), method: "post", class: "btn btn-danger" %>
+				<%# end %>
 
 				<br>
 
@@ -74,3 +88,17 @@
     </div>
   </div>
 </div>
+
+<script type="text/javascript">
+	// $('#like-button').click(function() {
+	// 	Rails.ajax({
+	// 		url: '<%= like_toggle_path(@post) %>',
+	// 		type: "POST",
+	// 		data: {},
+	// 		success: function(response) {
+	// 			console.log(response);
+	// 			$('#heart').attr('class', `icon ion-ios-${response}`);
+	// 		}
+	// 	});
+	// });
+</script>
