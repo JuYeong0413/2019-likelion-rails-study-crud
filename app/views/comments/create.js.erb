@@ -1,0 +1,7 @@
+// create를 하게되면 js 파일을 읽어들임
+$('#comment-list').prepend('<%= j(render(@comment)) %>');
+// json 방식으로 던져줘야하기때문에 덤프떠야 함(json으로 바꿔야 함)
+// 덤프떠야만 html에서 읽어올 수 있다.
+
+// form-for로 넣은 건 id가 자동으로 들어간다
+$('#comment_message').val('');

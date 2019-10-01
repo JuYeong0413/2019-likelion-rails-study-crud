@@ -18,6 +18,8 @@ class LikesController < ApplicationController
       @result = 'heart-empty'
     end
 
+    @count = post.likes.count
+
     # redirect_back(fallback_location: root_path)
     # render :json => result
     # render :js

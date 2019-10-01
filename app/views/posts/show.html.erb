@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="card col-4" style="width: 18rem;">
     <div class="card-body">
-			<h2 class="card-title"><%= @post.title %></h2>
+			<h2 class="card-title post_show__title"><%= @post_show__title %></h2>
 			<h5 class="card-text">작성자 : <%= @post.user.username %></h5>
 			<span class="card-text"><%= @post.created_at.strftime("%Y/%m/%d %H:%M") %></span>
 			<p class="card-text">조회수 : <%= @post.view_count %></p>
@@ -29,7 +29,7 @@
 
 				<br>
 
-				<%= @post.liked_users.count %>명이 좋아합니다.
+				<span id="liked-users-count"><%= @post.liked_users.count %></span>명이 좋아합니다.
 				<% @post.liked_users.each do |liked_user| %>
 					<%= liked_user.username %>&nbsp;
 				<% end %>
@@ -50,19 +50,21 @@
 
 <div>
   <div id="comments" style="margin-bottom: 20px;">
-    <% @comments.each do |comment| %>
-      <%= render comment %>
-      <% if current_user == comment.user %>
-        <span class="text-right"><%= link_to "삭제", post_comment_path(@post, comment), method: :delete %></span>
-      <% end %>
-      <br>
-    <% end %>
+		<div id="comment-list">
+	    <% @comments.each do |comment| %>
+	      <%= render comment %>
+				<%#= render 'comments/comment', comment: comment %> <!-- comment에다가 comment변수 넣을 것임 -->
+	      <%# if current_user == comment.user %>
+	        <!-- <span class="text-right"><%#= link_to "삭제", post_comment_path(@post, comment), method: :delete %></span> -->
+	      <%# end %>
+	    <% end %>
+	  </div>
   </div>
 
   <% if user_signed_in? %>
-    <%= form_for(@comment, url: post_comments_path(@post)) do |f| %>
+    <%= form_for(@comment, url: post_comments_path(@post), remote: true) do |f| %>
       <%= f.text_area :message, class: "form-control col-md-4", placeholder: "댓글을 입력해 주세요.." %><br>
-      <%= f.submit "댓글 작성하기", class: "btn btn-primary" %>
+      <%= f.submit "댓글 작성하기", class: "btn btn-primary", id: 'comment-create-button' %>
     <% end %>
   <% end %>
 </div>
@@ -88,6 +90,8 @@
     </div>
   </div>
 </div>
+
+<%= stylesheet_link_tag 'post_show' %>
 
 <script type="text/javascript">
 	// $('#like-button').click(function() {

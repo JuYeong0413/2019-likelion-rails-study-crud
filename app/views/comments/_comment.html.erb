@@ -1,1 +1,6 @@
-<strong><%= comment.user.username %></strong> : <%= comment.message %>
+<strong><%= comment.user&.username %></strong> : <%= comment.message %>
+<strong><%#= comment.user.username %></strong>  <%#= comment_message %>
+<%# if current_user == comment.user %>
+  <span class="text-right"><%= link_to "삭제", post_comment_path(@post, comment), method: :delete %></span>
+<%# end %>
+<br>
